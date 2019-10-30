@@ -1,0 +1,39 @@
+package com.JDBC;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class JDBC {
+
+	public static void main(String[] args) throws ClassNotFoundException,SQLException{
+		// TODO Auto-generated method stub
+		
+      Class.forName("com.mysql.jdbc.Driver");
+       Connection conn = null;
+      conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/users","root","3202");
+      if(conn!=null) {
+    	  System.out.println("Connected\n");   	     	  
+    	  Statement st = conn.createStatement();
+    	  ResultSet rs = st.executeQuery("SELECT * FROM employee");
+    	  System.out.println("empId\t\t\tName\t\t\tSex\t\t\tDepartment");
+    	  while(rs.next()) {
+    		  System.out.print(" "+rs.getInt(1));
+    		  System.out.print("\t\t\t"+rs.getString(2));
+    		  System.out.print("\t\t\t"+rs.getString(3));
+    		  System.out.print("\t\t\t"+rs.getString(4));
+    		  System.out.println();
+    		  
+    	  }
+      } 
+      else {
+    	  System.out.println("not connected");
+      }		 
+	     conn.close();
+    	  
+        
+	}
+
+}
